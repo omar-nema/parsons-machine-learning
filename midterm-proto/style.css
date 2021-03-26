@@ -2,9 +2,12 @@
     font-family: 'Arial';
 }
 
+body {
+    overflow: hidden;
+}
 #container {
-    max-width: 900px;
-    width: 100%;
+    max-width: 1300px;
+    width: 90%;
     margin:auto;
     padding-top: 50px;
     color: rgba(153,153,153);
@@ -44,7 +47,10 @@
 .block-container {
     display: inline-flex;
     flex-wrap: wrap;
+    max-height: calc(100vh - 270px);
+    overflow: auto;
 }
+
 
 .block {
     margin-right: 20px;

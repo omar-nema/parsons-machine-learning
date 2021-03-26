@@ -1,4 +1,6 @@
 
+var imgMetaArray = Object.keys(imgMeta).map((key) => [Number(key), imgMeta[key]]);
+
 window.addEventListener("load", function(){
     
     for (var key in imgMeta) { //clean data and delete objects that have no nbrs
@@ -18,65 +20,39 @@ window.addEventListener("load", function(){
 
 
 function eventBlockClick(d){
-    var blockid =this.getAttribute('id');
-    var nbrs = imgNbrs[blockid];
-    document.querySelector('.block-container').innerHTML = '';
 
-    console.log(this.getAttribute('id'), nbrs)
-
-    nbrs.forEach(d=> {
-        nbrObj = imgMeta[d];
-        loadBlock(nbrObj)
-    })
+    var blockid = d3.select(this).data()[0][0];
+    var nbrs = imgNbrs[blockid.toString()];
+    console.log(nbrs)
+    var currData = imgMetaArray.filter(d=> nbrs.includes(d[0].toString()))
+    plotBlocks(currData);
     
 }
 
-//show top 12 blocks
-
-// function loadBlock(img){
-
-//     let block = document.createElement('div');
-//     block.className = 'block';
-//     block.id = img.id;
-
-//     let blockImg = document.createElement('div');
-//     blockImg.className = 'block-image'
-
-//     let blockLabel = document.createElement('div');
-//     blockLabel.className = 'block-label';
-//     blockLabel.innerText = img.title;
-
-//     var imgObj = new Image();                             
-//     imgObj.src = img.file;
-
-//     imgObj.addEventListener("load", function(){
-
-//         blockImg.appendChild(this);
-//         block.appendChild(blockImg);
-//         block.appendChild(blockLabel);
-//         document.querySelector('.block-container').appendChild(block);
-//         block.addEventListener('click', eventBlockClick)
-//     });
-// }
-
-
 function initBlocks(){
+    plotBlocks(imgMetaArray)
+}
 
 
-    var imgMetaArray = Object.keys(imgMeta).map((key) => [Number(key), imgMeta[key]]);
-
+function plotBlocks(data){
     var blockCont = d3.select('.block-container');
-    var blocks = blockCont.selectAll('.block').data(imgMetaArray, d => d[0]).join('div').attr('class', 'block');
-    blocks.append('img').attr('class', 'block-image').attr('src', d=> d[1].file);
-    blocks.append('div').attr('class', 'block-label').text(d=> d[1].title);
-    blocks.
-    
+    var blocks = blockCont.selectAll('.block').data(data, d=>d[0]).join(
+        enter => {
+            var b = enter.append('div').attr('class', 'block');
+            b.append('img').attr('class', 'block-image').attr('src', d=> d[1].file);
+            b.append('div').attr('class', 'block-label').text(d=> d[1].title);
+        }
+    ).attr('class', 'block');
 
+    blockCont.selectAll('.block').on('click', eventBlockClick)
+    
     d3.select('.filter-btn').on('click', d=>{
         shuffleBlocks();
     });
-
 }
+
+
+
 
 
 function displayNeighbors(){
@@ -84,5 +60,5 @@ function displayNeighbors(){
 }
 
 function shuffleBlocks(){
-    console.log('shuffling')
+   plotBlocks(imgMetaArray);
 }
