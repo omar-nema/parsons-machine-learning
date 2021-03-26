@@ -6,7 +6,7 @@ body {
     overflow: hidden;
 }
 #container {
-    max-width: 1300px;
+    max-width: 1000px;
     width: 90%;
     margin:auto;
     padding-top: 50px;
@@ -49,6 +49,7 @@ body {
     flex-wrap: wrap;
     max-height: calc(100vh - 270px);
     overflow: auto;
+    justify-content: space-between;
 }
 
 

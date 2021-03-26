@@ -13,7 +13,10 @@ window.addEventListener("load", function(){
         }
     }
 
-    initBlocks();
+    console.log(sampleBlocks());
+    console.log(sampleBlocks());
+
+    shuffleBlocks();
 
  
 });
@@ -23,14 +26,19 @@ function eventBlockClick(d){
 
     var blockid = d3.select(this).data()[0][0];
     var nbrs = imgNbrs[blockid.toString()];
-    console.log(nbrs)
     var currData = imgMetaArray.filter(d=> nbrs.includes(d[0].toString()))
     plotBlocks(currData);
     
 }
 
-function initBlocks(){
-    plotBlocks(imgMetaArray)
+function sampleBlocks(){
+    imgMetaArray = d3.shuffle(imgMetaArray);
+    blockSample = imgMetaArray.slice(0, 14)
+    return blockSample;
+}
+
+function shuffleBlocks(){
+    plotBlocks(sampleBlocks(imgMetaArray));
 }
 
 
@@ -59,6 +67,3 @@ function displayNeighbors(){
     console.log('n time')
 }
 
-function shuffleBlocks(){
-   plotBlocks(imgMetaArray);
-}
