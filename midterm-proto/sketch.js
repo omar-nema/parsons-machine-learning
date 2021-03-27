@@ -12,10 +12,6 @@ window.addEventListener("load", function(){
             currVal.id = key;
         }
     }
-
-    console.log(sampleBlocks());
-    console.log(sampleBlocks());
-
     shuffleBlocks();
 
  
@@ -27,6 +23,7 @@ function eventBlockClick(d){
     var blockid = d3.select(this).data()[0][0];
     var nbrs = imgNbrs[blockid.toString()];
     var currData = imgMetaArray.filter(d=> nbrs.includes(d[0].toString()))
+    console.log(blockid, nbrs, currData);
     plotBlocks(currData);
     
 }
