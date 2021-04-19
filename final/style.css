@@ -24,24 +24,40 @@ body {
     height: 100%;
     top: 0;
     left: 0;
-    pointer-events: none;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     color: white;
-    transition: all .3s ease-in-out;
-    
+    transition: all .3s ease-in-out;   
 }
-#load-overlay div {
-    font-size: 40px;
+#load-overlay .load-btn {
+    background: black;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    opacity: 0.5;
+    transition: opacity .3s ease-in-out, background .15s linear;
 }
-#load-overlay .numPosters {
-    color: gray;
+#load-overlay .load-btn.enabled {
+    opacity: 1;
+    cursor: pointer;
+}
+#load-overlay .load-btn.enabled:hover {
+    background: #191919;
 }
 #load-overlay.done {
     opacity: 0;
     height: 0;
+} 
+
+.overlay-body {
+    width: 80%;
+    max-width: 600px;
+    font-size: 24px;
+}
+#load-overlay .desc {
+    margin-bottom: 25px;
 }
 
 header {
@@ -55,9 +71,27 @@ header {
     padding: 0 50px; 
 }
 .header-large {
-    color: white;
     font-size: 18px;
+    font-weight: 500;
+    color: #e4e4e4;
+    cursor: pointer;
+    transition: opacity .15s linear;
 }
+.header-large .info-icon{
+    margin-left: 12px;
+    background: gray;
+    border-radius: 100%;
+    padding: 1px 6px;
+    font-size: 14px;
+    font-weight: 400;
+    color: white;
+}
+.header-large:hover {
+    opacity: 0.8;
+}
+
+
+
 canvas {
     margin-top: 20px;
     margin-left: 50px;
@@ -175,7 +209,7 @@ body {
     background: rgba(40,40,40);
     opacity: .9;
     pointer-events: none;
-    transition: width .2s linear;
+    transition: width .05s linear, height .05s linear;
 }
 .img-padding.right {
     right: 0;

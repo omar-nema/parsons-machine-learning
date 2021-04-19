@@ -18,7 +18,7 @@ viewport.drag().pinch().wheel().decelerate()
 // INIT DATA
 let posterArray = Object.entries(posterAttr);
 posterArray = posterArray.sort((a,b)=> a[1].GridOrder - b[1].GridOrder);
-posterArray = posterArray.slice(0, 1000)
+posterArray = posterArray.slice(0, 300)
 const numImgs = posterArray.length;
 posterArray.forEach(d => {
     var fileName = './poster-assets-thumb/' + d[0] + '.jpg';
@@ -65,12 +65,20 @@ app.loader.load((loader, resources)=> {
 
 let progress = document.querySelector('#progress');
 app.loader.onProgress.add((e) => {
-    progress.innerText = Math.round(e.progress.toString()) + '%'
+    progress.innerText = 'Loading ' + Math.round(e.progress.toString()) + '%'
 }); 
 
+let loadBtn = document.querySelector('#load-overlay .load-btn');
+loadBtn.addEventListener('click', function(){
+    document.querySelector('#load-overlay').className = 'done';
+});
+
 app.loader.onComplete.add(() => {
-    console.log('DOE BETCH')
-    document.querySelector('#load-overlay').className = 'done'
+    progress.innerText = 'Explore Posters';
+    
+    loadBtn.className = 'load-btn enabled';
+
+   
 
 }); // called once when the queued resources all load.
 
