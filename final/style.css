@@ -17,6 +17,33 @@ body {
     font-weight: 300;
 }
 
+#load-overlay {
+    background: rgb(40,40,40);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    transition: all .3s ease-in-out;
+    
+}
+#load-overlay div {
+    font-size: 40px;
+}
+#load-overlay .numPosters {
+    color: gray;
+}
+#load-overlay.done {
+    opacity: 0;
+    height: 0;
+}
+
 header {
     background: rgb(10,10,10);
     width: 100%;

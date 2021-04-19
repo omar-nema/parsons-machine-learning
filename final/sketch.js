@@ -59,10 +59,20 @@ app.loader.load((loader, resources)=> {
             }
        
         }
-
     }
     viewport.addChild(container);
-})
+});
+
+let progress = document.querySelector('#progress');
+app.loader.onProgress.add((e) => {
+    progress.innerText = Math.round(e.progress.toString()) + '%'
+}); 
+
+app.loader.onComplete.add(() => {
+    console.log('DOE BETCH')
+    document.querySelector('#load-overlay').className = 'done'
+
+}); // called once when the queued resources all load.
 
 
 //UPDATE ON ZOOM
