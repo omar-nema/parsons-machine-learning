@@ -1,0 +1,176 @@
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
+
+
+* {
+    font-family: 'Rubik', 'sans-serif';
+    
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: rgb(40,40,40);
+    font-weight: 300;
+}
+
+header {
+    background: rgb(10,10,10);
+    width: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    box-shadow: 0px 2px 3px 3px rgb(37 37 37 / 24%);
+    padding: 0 50px; 
+}
+.header-large {
+    color: white;
+    font-size: 18px;
+}
+canvas {
+    margin-top: 20px;
+    margin-left: 50px;
+    transition: opacity .3s linear;
+}
+
+
+#poster-tooltip {
+    position: absolute;
+    background: black;
+    color: white;
+    left: 70%;
+    top: 50%;
+    transform: translate(0, -50%);
+    box-shadow: 0px 1px 2px 2px rgb(66 66 66 / 10%);
+    transition: opacity .3s linear;
+    opacity: 0;
+    max-width: 20%;
+    border: 1px solid #353535;
+}
+
+.tip-body {
+    padding: 20px 30px;
+    pointer-events: none;
+}
+.btn-row {
+    width: 100%;
+    height: 40px;
+    background: #5a5959;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.btn {
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.btn:hover {
+    background: #4a4a4a;
+}
+.btn-row.two-col .btn {
+    flex-basis: 50%;
+}
+.btn-row.two-col .btn:nth-child(1){
+    border-right: 1px solid black;
+}
+
+
+#poster-tooltip .poster-title {
+    font-weight: 400;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+#poster-tooltip .poster-title .date {
+    color: rgb(166,166,166);
+    margin-left: 10px;
+}
+
+#poster-tooltip .col.metadata {
+    min-width: 150px;
+}
+
+#poster-tooltip .metadata-val {
+    margin-bottom: 10px;
+}
+
+#poster-tooltip .metadata-val span {
+    background: #353535;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+
+
+#poster-tooltip .metadata-val .label {
+    font-size: 14px;
+    color: rgba(214,214,214);
+    margin-bottom: 5px;
+}
+
+#poster-tooltip .metadata-val .value {
+    font-size: 14px;
+    display: inline-flex;
+    flex-wrap: wrap;
+    margin-bottom: 5px;
+    max-width: 100%;
+    word-break: break-all;
+}
+
+
+/* 
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+} */
+
+
+.img-padding {
+    position: absolute;
+    background: rgba(40,40,40);
+    opacity: .9;
+    pointer-events: none;
+    transition: width .2s linear;
+}
+.img-padding.right {
+    right: 0;
+    width: 0;    
+    height: 100%;
+    top: 60px;     
+}
+.img-padding.left {
+    left: 0;
+    width: 0;    
+    height: 100%;
+    top: 60px;     
+}
+.img-padding.top{
+    width: 100%;  
+    height: 0;
+    top: 60px;     
+}
+.img-padding.bottom{
+    width: 100%;   
+    height: 0; 
+    bottom: 0;
+}
+
+
