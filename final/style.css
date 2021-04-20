@@ -17,6 +17,14 @@ body {
     font-weight: 300;
 }
 
+a {
+    color: white;
+    text-decoration-color: gray;
+}
+a:hover {
+    opacity: 0.8;
+}
+
 #load-overlay {
     background: rgb(40,40,40);
     position: absolute;
@@ -54,7 +62,7 @@ body {
 .overlay-body {
     width: 80%;
     max-width: 600px;
-    font-size: 24px;
+    font-size: 22px;
 }
 #load-overlay .desc {
     margin-bottom: 25px;
