@@ -39,8 +39,7 @@ const xUnits = Math.ceil(unitBasis*ar), yUnits = Math.ceil(unitBasis);
 const aspectRatio = viewport.worldWidth/viewport.worldHeight;
 let container = new PIXI.Container();
 var spriteHolder = [];
-
-
+var spriteDict = {};
 
 
 app.loader.load((loader, resources)=> {
@@ -53,6 +52,7 @@ app.loader.load((loader, resources)=> {
                 const sprite = createSprite(currResource, x, y);
                 container.addChild(sprite);
                 spriteHolder.push(sprite);
+                spriteDict[currResource.name] = spriteHolder.length-1;
                 rIndex++
             } else {
                 break;
@@ -62,7 +62,6 @@ app.loader.load((loader, resources)=> {
     }
     viewport.addChild(container);
 });
-
 
 
 
@@ -79,11 +78,7 @@ loadBtn.addEventListener('click', function(){
 
 app.loader.onComplete.add(() => {
     progress.innerText = 'Explore Posters';
-    
     loadBtn.className = 'load-btn enabled';
-
-   
-
 }); // called once when the queued resources all load.
 
 
@@ -93,6 +88,10 @@ function hideInfo(){
 document.querySelector('.header-large').addEventListener('click', hideInfo);
 document.querySelector('.header-info-footer').addEventListener('click', hideInfo);
 
+function getSpriteByKey(key){
+    let spriteIndex = spriteDict[key];
+    return spriteHolder[spriteIndex];
+}
 
 //UPDATE ON ZOOM
 var lastScale = 1;

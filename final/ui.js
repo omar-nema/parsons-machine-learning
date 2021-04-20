@@ -3,7 +3,6 @@ let tooltip = document.querySelector('#poster-tooltip');
 let zoomedRestore = 5;
 
 function populateTooltip(posterData){
-    tooltip.style.opacity = 1;
     tooltip.innerHTML = '';
     let posterBody = document.createElement('div');
     posterBody.className = 'tip-body';
@@ -28,7 +27,7 @@ function populateTooltip(posterData){
     posterTitle.innerHTML = `<div class="poster-title"><span>${posterData['Title']}</span><span class="date">${posterData['Date']}</span></div>`;
     posterBody.appendChild(posterTitle);
     
-    let attributes = ['Artist', 'Iconography', 'Language', 'Link', 'Title'];
+    let attributes = [ 'Artist', 'Iconography', 'Language', 'Link'];
     attributes.forEach(d=> {
         attr = posterData[d];
         if (attr){
@@ -48,7 +47,12 @@ function populateTooltip(posterData){
                     htmlString += `<span>${val}</span>`
                 })
             } else {
-                htmlString = attr;
+                if (d == 'Link'){
+                    htmlString = `<a href="${attr}">PPP Link<a>`
+                } else {
+
+                    htmlString = attr;            }
+
             }
             metaDataValue.innerHTML = htmlString;
 
@@ -60,15 +64,16 @@ function populateTooltip(posterData){
       
     tooltip.appendChild(posterBody);
     tooltip.appendChild(posterFooter);
+    tooltip.className = ''; 
+
 }
 
 function hideTooltip(){
     document.querySelector('.img-padding.left').style.width = 0;
     document.querySelector('.img-padding.right').style.width = 0;
     document.querySelector('.img-padding.top').style.height = 0;
-    document.querySelector('.img-padding.bottom').style.height = 0;            
-    tooltip.style.opacity = 0;
- 
+    document.querySelector('.img-padding.bottom').style.height = 0;          
+    tooltip.className = 'hidden' ;
 }
 
 
@@ -84,7 +89,22 @@ function hideAdjacentImages(xPadding, yPadding){
 }
 
 function createSprite(currResource, x, y){
-    const sprite = new PIXI.Sprite(currResource.texture);
+    let sprite = new PIXI.Sprite(currResource.texture);
+
+
+    //create using filename instead of resource
+
+    // console.log(currResource.texture)
+    // let texture = PIXI.Texture.from(currResource);
+    // sprite.texture = texture;
+
+    // let text = PIXI.Texture.from(currResource.texture)
+    // let newSprite = new PIXI.Sprite();
+    
+
+    // highResText = PIXI.Texture.from(highResTexture);
+    // d.texture = highResText;    
+
     let spriteX = x*(unitSize)+padding*.5*unitSize;
     let spriteY = y*(unitSize)+padding*.5*unitSize;
     sprite.x = spriteX;
@@ -95,8 +115,6 @@ function createSprite(currResource, x, y){
     sprite.width = sprite.width*scaleRatio*(1-padding);
     sprite.height = sprite.height*scaleRatio*(1-padding);
     sprite.interactive = true;
-
-  
 
     sprite.on('click', (d)=> {
         viewport.animate({

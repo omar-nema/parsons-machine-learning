@@ -104,16 +104,12 @@ header {
     color: #e4e4e4;
     cursor: pointer;
     transition: opacity .15s linear;
+    display: flex;
 }
-.header-large .info-icon{
-    margin-left: 12px;
-    background: gray;
-    border-radius: 100%;
-    padding: 1px 6px;
-    font-size: 14px;
-    font-weight: 400;
-    color: white;
+.header-large span {
+    margin-right: 10px;
 }
+
 .header-large:hover {
     opacity: 0.8;
 }
@@ -141,12 +137,14 @@ header {
     box-shadow: 0 1px 3px 2px rgb(0 0 0 / 39%);
     border-bottom: 1px solid black;
     transition: height .3s ease-in-out, color .15s ease-in-out;
+    z-index: 10000;
 } 
 
 .header-info.collapsed {
     color: rgba(0,0,0,0);
     opacity: 0;
     height: 0;
+    pointer-events: none;
 }
 .header-info-text {
     padding: 20px 50px;
@@ -176,14 +174,16 @@ canvas {
     transform: translate(0, -50%);
     box-shadow: 0px 1px 2px 2px rgb(0 0 0 / 10%);
     transition: opacity .3s linear;
-    opacity: 0;
+    opacity: 1;
     max-width: 20%;
-    
+}
+#poster-tooltip.hidden {
+    opacity: 0;
+    pointer-events: none;
 }
 
 .tip-body {
     padding: 20px 30px;
-    pointer-events: none;
 }
 .btn-row {
     width: 100%;
@@ -237,7 +237,7 @@ canvas {
     border-radius: 3px;
     font-size: 14px;
     text-overflow: ellipsis;
-    white-space: nowrap;
+    white-space: normal;
     margin-right: 5px;
     margin-bottom: 5px;
 }
