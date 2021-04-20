@@ -3,13 +3,15 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title>sketch</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./style.css">
 </head>
 <body>
     <div id="load-overlay">
         <div class="overlay-body">
             <div class="desc">
-                Explore a collection of 5000 posters created by Palestinian artists, and sorted by machine learning. Poster assets and metadata were taken from the <a href="https://www.palestineposterproject.org/">Palestine Poster Project</a>, curated by Dan Walsh.
+                Explore a collection of 5000 posters created by Palestinian artists, and sorted by machine learning. <span class='sec-text'>Poster assets and metadata were taken from the <a href="https://www.palestineposterproject.org/"  target="_blank">Palestine Poster Project</a>, curated by Dan Walsh, and span from 1930 to present day.</span>
              </div>
             <div class="load-btn disabled"><span id="progress" class="numPosters"></span></div>
         </div>
@@ -21,7 +23,23 @@
             <span>Palestine Poster Project</span>
             <span class="info-icon">?</span>
         </div>
+        <div class="header-right">
+            <div class="btn-shuffle btn header-btn"><span class="material-icons">shuffle</span></div>
+            <div class="btn-zoom-in btn header-btn"><span class="material-icons">zoom_in</span></div>
+            <div class="btn-zoom-out btn header-btn"><span class="material-icons">zoom_out</span></div>
+            
+        </div>
     </header>
+    <div class="header-info collapsed">
+        <div class="header-info-text">
+            In the grid below, posters are sorted by similarity - posters close to each other share similar visual content, iconography, and artists.
+            <br>
+    Scroll to zoom in and out, click on a poster to view details.
+        </div>
+        <div class="header-info-footer btn"><span class="material-icons">
+            expand_less
+            </span></div>
+    </div>
     <div id="bg-wrapper"></div>
 
 

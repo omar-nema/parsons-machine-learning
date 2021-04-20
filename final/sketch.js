@@ -18,7 +18,7 @@ viewport.drag().pinch().wheel().decelerate()
 // INIT DATA
 let posterArray = Object.entries(posterAttr);
 posterArray = posterArray.sort((a,b)=> a[1].GridOrder - b[1].GridOrder);
-//posterArray = posterArray.slice(0, 300)
+posterArray = posterArray.slice(0, 300)
 const numImgs = posterArray.length;
 posterArray.forEach(d => {
     var fileName = './poster-assets-thumb/' + d[0] + '.jpg';
@@ -63,6 +63,10 @@ app.loader.load((loader, resources)=> {
     viewport.addChild(container);
 });
 
+
+
+
+//UI STUFFS
 let progress = document.querySelector('#progress');
 app.loader.onProgress.add((e) => {
     progress.innerText = 'Loading ' + Math.round(e.progress.toString()) + '%'
@@ -81,6 +85,13 @@ app.loader.onComplete.add(() => {
    
 
 }); // called once when the queued resources all load.
+
+
+function hideInfo(){
+    document.querySelector('.header-info').classList.toggle("collapsed");
+}
+document.querySelector('.header-large').addEventListener('click', hideInfo);
+document.querySelector('.header-info-footer').addEventListener('click', hideInfo);
 
 
 //UPDATE ON ZOOM

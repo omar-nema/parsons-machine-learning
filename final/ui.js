@@ -72,7 +72,6 @@ function hideTooltip(){
 }
 
 
-
 function hideAdjacentImages(xPadding, yPadding){
     pl = document.querySelector('.img-padding.left');
     pr = document.querySelector('.img-padding.right');
