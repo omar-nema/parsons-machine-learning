@@ -20,7 +20,7 @@ function populateTooltip(posterData){
  
     let posterFooter = document.createElement('div');
     posterFooter.className = 'btn-row two-col';
-    posterFooter.innerHTML = '<div class="btn">Previous</div><div class="btn">Next</div>';
+    posterFooter.innerHTML = '<div class="btn" id="btn-previous">Previous</div><div class="btn" id="btn-next">Next</div>';
     
     let posterTitle = document.createElement('div');
     posterTitle.className = 'poster-title';
@@ -60,11 +60,20 @@ function populateTooltip(posterData){
             metaDataGrp.appendChild(metaDataValue)
             posterBody.appendChild(metaDataGrp)
         }
-    })
+    });
       
     tooltip.appendChild(posterBody);
     tooltip.appendChild(posterFooter);
     tooltip.className = ''; 
+
+    document.querySelector('#btn-next').addEventListener('click', ()=>{
+        let nextSprite = getRelativeSprite(posterData.Id, 1);
+        zoomIntoSprite(nextSprite);
+    });
+    document.querySelector('#btn-previous').addEventListener('click', ()=>{
+        let prevSprite = getRelativeSprite(posterData.Id, -1);
+        zoomIntoSprite(prevSprite);
+    });
 
 }
 
@@ -89,22 +98,8 @@ function hideAdjacentImages(xPadding, yPadding){
 }
 
 function createSprite(currResource, x, y){
+
     let sprite = new PIXI.Sprite(currResource.texture);
-
-
-    //create using filename instead of resource
-
-    // console.log(currResource.texture)
-    // let texture = PIXI.Texture.from(currResource);
-    // sprite.texture = texture;
-
-    // let text = PIXI.Texture.from(currResource.texture)
-    // let newSprite = new PIXI.Sprite();
-    
-
-    // highResText = PIXI.Texture.from(highResTexture);
-    // d.texture = highResText;    
-
     let spriteX = x*(unitSize)+padding*.5*unitSize;
     let spriteY = y*(unitSize)+padding*.5*unitSize;
     sprite.x = spriteX;
@@ -117,20 +112,7 @@ function createSprite(currResource, x, y){
     sprite.interactive = true;
 
     sprite.on('click', (d)=> {
-        viewport.animate({
-            time: 300,
-            scale: viewport.screenWidth/(2.2*unitSize),
-            position: {x: spriteX ,y: spriteY}
-        })
-
-        setTimeout(function() {
-            hitArea = viewport.hitArea;
-            let xPadding =  ( 100*(1-(unitSize/hitArea.width))/2 ) + '%';
-            let yPadding =  ( 100*(1-(unitSize/hitArea.height))/2 ) + '%';   
-            hideAdjacentImages(xPadding, yPadding);
-        }, 300)
-        
-        populateTooltip(posterAttr[currResource.name])        
+        zoomIntoSprite(sprite, spriteX, spriteY); 
     })
     sprite.on('mouseover', (d)=> {
         document.querySelector("canvas").style.cursor = "pointer";
@@ -148,14 +130,17 @@ function updateSpriteRes(){
     });
     if (filterSprites.length < 10){
         filterSprites.forEach( d => {
-            //BAD CODE
-            if (d.texture.textureCacheIds.length > 1){
+            if (!d.highRes){
                 let highResTexture = './poster-assets/' + d.texture.textureCacheIds[0] + '.jpg';
                 let textId = d.texture.textureCacheIds[0];
                 highResText = PIXI.Texture.from(highResTexture);
                 d.texture = highResText;    
+                //id gets generated differently this time, correct for that
+                let fileName = d.texture.textureCacheIds[0].split("/").pop();
+                let fileId =  fileName.substr(0, fileName.lastIndexOf("."))
+                d.texture.textureCacheIds = [fileId, d.texture.textureCacheIds[0]]
+                d.highRes = true;
             }
-         
         });           
     }
     return filterSprites;

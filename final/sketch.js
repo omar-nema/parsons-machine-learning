@@ -88,17 +88,61 @@ function hideInfo(){
 document.querySelector('.header-large').addEventListener('click', hideInfo);
 document.querySelector('.header-info-footer').addEventListener('click', hideInfo);
 
-function getSpriteByKey(key){
+
+function getRelativeSprite(key, relativeIndex){
     let spriteIndex = spriteDict[key];
-    return spriteHolder[spriteIndex];
+    return spriteHolder[spriteIndex+relativeIndex];
 }
+
+function zoomIntoSprite(sprite, x, y){  
+    if (!x){
+        x = sprite.x;
+    }
+    if (!y){
+        y = sprite.y;
+    }
+    let key = sprite.texture.textureCacheIds[0];
+    viewport.animate({
+        time: 300,
+        scale: viewport.screenWidth/(2.2*unitSize),
+        position: {x: x ,y: y}
+    });
+    setTimeout(function() {
+        hitArea = viewport.hitArea;
+        let xPadding =  ( 100*(1-(unitSize/hitArea.width))/2 ) + '%';
+        let yPadding =  ( 100*(1-(unitSize/hitArea.height))/2 ) + '%';   
+        hideAdjacentImages(xPadding, yPadding);
+    }, 300)
+    
+    populateTooltip(posterAttr[key]) ;
+    updateSpriteRes();
+}
+
+document.querySelector('.btn-shuffle').addEventListener('click', ()=>{
+    let randomSprite = spriteHolder[Math.floor(Math.random() * spriteHolder.length)];
+    zoomIntoSprite(randomSprite);
+})
+
+document.querySelector('.btn-zoom-in').addEventListener('click', ()=>{
+    viewport.animate({
+        time: 300,
+        scale: 2*viewport.lastViewport.scaleX
+    });
+})
+document.querySelector('.btn-zoom-out').addEventListener('click', ()=>{
+    viewport.animate({
+        time: 300,
+        scale: .5*viewport.lastViewport.scaleX
+    });
+})
+
 
 //UPDATE ON ZOOM
 var lastScale = 1;
 viewport.on('zoomed-end', (e) => {
     //if zoomedIn
     if (e.transform.localTransform.a > lastScale){
-        updateSpriteRes(spriteHolder);
+        updateSpriteRes();
     } 
     else {
         hideTooltip();
