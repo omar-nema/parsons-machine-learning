@@ -23,7 +23,7 @@ let posterArray;
 async function initData(){
     posterArray = Object.entries(posterAttr);
     posterArray = posterArray.sort((a,b)=> a[1].GridOrder - b[1].GridOrder);
-    //posterArray = posterArray.slice(0, 500);
+    posterArray = posterArray.slice(0, 1000);
     return posterArray;
 }
 
@@ -104,7 +104,13 @@ function initHeaderAndZoom(){
             hideTooltip();
         }
         lastScale = e.transform.localTransform.a;
+    });
+
+    viewport.on('moved-end', (e)=>{
+        updateSpriteRes();
     })
+
+
 }
 
 function showLoadProgress(){

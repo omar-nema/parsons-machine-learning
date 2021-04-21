@@ -45,7 +45,7 @@ function updateSpriteRes(){
     let filterSprites = spriteHolder.filter(d=> {
         return d.x >= hitArea.x && d.x <= (hitArea.x+hitArea.width) && d.y >= hitArea.y && d.y <= (hitArea.y+hitArea.height)
     });
-    if (filterSprites.length < 10){
+    if (filterSprites.length < 20){
         filterSprites.forEach( d => {
             if (!d.highRes){
                 let highResTexture = './poster-assets/' + d.texture.textureCacheIds[0] + '.jpg';
