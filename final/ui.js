@@ -111,9 +111,23 @@ function createSprite(currResource, x, y){
     sprite.height = sprite.height*scaleRatio*(1-padding);
     sprite.interactive = true;
 
-    sprite.on('click', (d)=> {
-        zoomIntoSprite(sprite, spriteX, spriteY); 
-    })
+    let lastX;
+    let lastY;
+    sprite.on('mousedown', (e)=>{
+        console.log(e, e.data.global.x)
+        lastX = e.data.global.x;
+        lastY = e.data.global.y;
+    
+    });
+    sprite.on('mouseup', (e)=>{
+        let moveThreshold = .5;
+        let xMoved = e.data.global.x > (moveThreshold+lastX) || e.data.global.x < (lastX-moveThreshold);
+        let yMoved = e.data.global.y > (moveThreshold+lastY) || e.data.global.y < (lastY-moveThreshold);  
+        if (!xMoved && !yMoved){
+            zoomIntoSprite(sprite, spriteX, spriteY); 
+        };
+    });
+
     sprite.on('mouseover', (d)=> {
         document.querySelector("canvas").style.cursor = "pointer";
     });

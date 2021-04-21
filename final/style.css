@@ -83,6 +83,11 @@ a:hover {
     max-width: 600px;
     font-size: 22px;
 }
+.overlay-header {
+    font-size: 26px;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
 #load-overlay .desc {
     margin-bottom: 30px;
 }

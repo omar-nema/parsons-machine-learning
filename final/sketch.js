@@ -19,7 +19,7 @@ viewport.drag().pinch().decelerate()
 // INIT DATA
 let posterArray = Object.entries(posterAttr);
 posterArray = posterArray.sort((a,b)=> a[1].GridOrder - b[1].GridOrder);
-posterArray = posterArray.slice(0, 2000)
+posterArray = posterArray.slice(0, 500)
 const numImgs = posterArray.length;
 posterArray.forEach(d => {
     var fileName = './poster-assets-thumb/' + d[0] + '.jpg';
