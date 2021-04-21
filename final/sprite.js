@@ -1,9 +1,11 @@
 //CREATE SPRITE
-function createSprite(currResource, x, y){
+function createSprite(currResource, x, y, unitSize){
     const padding = .1;
     let sprite = new PIXI.Sprite(currResource.texture);
-    let spriteX = x*(unitSize)+padding*.5*unitSize;
-    let spriteY = y*(unitSize)+padding*.5*unitSize;
+    // let spriteX = x*(unitSize)+padding*.5*unitSize;
+    // let spriteY = y*(unitSize)+padding*.5*unitSize;
+    let spriteX = x;
+    let spriteY = y;
     sprite.x = spriteX;
     sprite.y = spriteY;
     sprite.anchor.x = 0.5;
@@ -11,12 +13,12 @@ function createSprite(currResource, x, y){
     scaleRatio = unitSize/Math.max(sprite.width, sprite.height);
     sprite.width = sprite.width*scaleRatio*(1-padding);
     sprite.height = sprite.height*scaleRatio*(1-padding);
+    
     sprite.interactive = true;
 
     let lastX;
     let lastY;
     sprite.on('mousedown', (e)=>{
-        console.log(e, e.data.global.x)
         lastX = e.data.global.x;
         lastY = e.data.global.y;
     
@@ -26,7 +28,7 @@ function createSprite(currResource, x, y){
         let xMoved = e.data.global.x > (moveThreshold+lastX) || e.data.global.x < (lastX-moveThreshold);
         let yMoved = e.data.global.y > (moveThreshold+lastY) || e.data.global.y < (lastY-moveThreshold);  
         if (!xMoved && !yMoved){
-            zoomIntoSprite(sprite, spriteX, spriteY); 
+            zoomIntoSprite(sprite, spriteX, spriteY, unitSize); 
         };
     });
 
@@ -62,17 +64,19 @@ function updateSpriteRes(){
     }
     return filterSprites;
 }
-function zoomIntoSprite(sprite, x, y){  
+function zoomIntoSprite(sprite, x, y, unitSize){  
     if (!x){
         x = sprite.x;
     }
     if (!y){
         y = sprite.y;
     }
+
     let key = sprite.texture.textureCacheIds[0];
+
     viewport.animate({
         time: 300,
-        scale: viewport.screenWidth/(2.2*unitSize),
+        scale: viewport.worldWidth/(2*unitSize),
         position: {x: x ,y: y}
     });
     setTimeout(function() {

@@ -22,8 +22,9 @@ async function initPixi(){
 let posterArray;
 async function initData(){
     posterArray = Object.entries(posterAttr);
-    posterArray = posterArray.sort((a,b)=> a[1].GridOrder - b[1].GridOrder);
-    posterArray = posterArray.slice(0, 1000);
+    posterArray = posterArray.sort((a,b)=> a[1].GridPosition[0] - b[1].GridPosition[0]);
+    posterArray = posterArray.sort((a,b)=> a[1].GridPosition[1] - b[1].GridPosition[1]);
+    ///posterArray = posterArray.slice(0, 1000);
     return posterArray;
 }
 
@@ -36,36 +37,44 @@ async function loadPosters(){
     
     //ADD IMAGES TO PIXI
     
-    const vw = viewport.worldWidth;
-    const vh = viewport.worldHeight;
-    const ar = vw/vh;
-    unitSize = Math.floor( Math.sqrt((vw*vh/(numImgs))) );
-    const numUnits = vw*vh/(unitSize*unitSize);
-    const unitBasis = Math.sqrt(numUnits/(ar));
-    //fix to make responsive for tall screens
-    const xUnits = Math.ceil(unitBasis*ar), yUnits = Math.ceil(unitBasis);
-    const aspectRatio = viewport.worldWidth/viewport.worldHeight;
     let container = new PIXI.Container();
     var spriteDict = {};
-    
+    const xUnits = posterArray.reduce((a,b, index)=> {
+        if (index == 1){
+            return Math.max(a[1].GridPosX, b[1].GridPosX);
+        } else {
+            return Math.max(a, b[1].GridPosX);
+        }
+    });
+    const yUnits = posterArray.reduce((a,b, index)=> {
+        if (index == 1){
+            return Math.max(a[1].GridPosY, b[1].GridPosY);
+        } else {
+            return Math.max(a, b[1].GridPosY);
+        }
+    });
+    const gridLargeDim = Math.max(xUnits, yUnits);
+    const viewSmallDim = Math.min(viewport.worldWidth, viewport.worldHeight);
+    const unitSize = Math.sqrt((viewSmallDim*viewSmallDim)/(gridLargeDim*gridLargeDim));
+
+    //make sure it's centered
+    const viewOffsetX = (viewport.worldWidth-(unitSize*xUnits))/2;
+    const viewOffsetY = (viewport.worldHeight-(unitSize*yUnits))/2;
+   
     app.loader.load((loader, resources)=> {
         const resourceArray = Object.values(resources);
         let rIndex = 0;
-        for (var y=0; y<yUnits; y++){
-            for (var x=0; x<xUnits; x++){
-                if (rIndex < resourceArray.length-1){
-                    let currResource = resourceArray[rIndex];
-                    const sprite = createSprite(currResource, x, y);
-                    container.addChild(sprite);
-                    spriteHolder.push(sprite);
-                    spriteDict[currResource.name] = spriteHolder.length-1;
-                    rIndex++
-                } else {
-                    break;
-                }
-           
-            }
-        }
+
+        resourceArray.forEach(r => {
+            let metadata = posterAttr[r.name];
+            let x = metadata.GridPosX * unitSize + viewOffsetX;
+            let y = metadata.GridPosY * unitSize + viewOffsetY;          
+            const sprite = createSprite(r, x, y, unitSize);
+            container.addChild(sprite);
+            spriteHolder.push(sprite);
+            spriteDict[r.name] = spriteHolder.length-1;
+        })
+
         viewport.addChild(container);
     });
     return [spriteDict, spriteHolder]
