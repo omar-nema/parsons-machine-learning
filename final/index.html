@@ -10,17 +10,26 @@
 <body>
     <div id="load-overlay">
         <div class="overlay-body">
-            <div class="overlay-header">Explore Palestinian Posters</div>
+            <div class="overlay-header">Explore the Palestine Poster Archive</div>
             <div class="desc">
-                The Palestine Poster Project is a collection over 10,000 posters related to Palestine, compiled by Dan Walsh. In this application, a set of 5000 posters created by Palestinian artists, and drawn from the PPP archive, are sorted by similarity using machine learning. 
-
-                <span class='sec-text'>Poster assets and metadata were taken from the <a href="https://www.palestineposterproject.org/"  target="_blank">Palestine Poster Project</a>, curated by Dan Walsh, and span from 1930 to present day.</span>
+                 In this application,  <span class="semi-strong">a set of 5,000 posters created by Palestinian artists, and drawn from the Palestine Poster Project archive, are sorted by similarity using machine learning</span>. 
+                 <br><br>
+                <span class='sec-text'>Poster assets and metadata were taken from the <a href="https://www.palestineposterproject.org/"  target="_blank">Palestine Poster Project</a>, curated by Dan Walsh. The PPP archive contains a set of 10,000 posters dating from 1930 to present day. Sole credit for archiving and categorizing the posters in this project goes to the PPP team (I had no part in this work).</span>
              </div>
             <div class="load-btn disabled"><span id="progress" class="numPosters"></span></div>
         </div>
      
     </div>
-
+    <div class="header-info">
+        <div class="header-info-text">
+            In the grid below, posters are sorted by similarity - posters close to each other share similar visual content, iconography, and artists (determined by a combination of machine learning methods - feature extraction and dimensional reduction).
+            <br><br>
+        Scroll to zoom in and out, click on a poster to view details. 
+        </div>
+        <div class="header-info-footer"><span class="material-icons">
+            expand_less
+            </span></div>
+    </div>
     <header>
         <div class="header-large">
             <span>Palestine Poster Project</span>
@@ -34,17 +43,7 @@
             
         </div>
     </header>
-    <div class="header-info collapsed">
-        <div class="header-info-text">
-            In the grid below, posters are sorted by similarity - posters close to each other share similar visual content, iconography, and artists (determined by a combination of machine learning methods - feature extraction and dimensional reduction).
-            <br><br>All poster content is taken from the Palestine Poster Project. Sole credit for archiving content and labeling metadata goes to Dan Walsh and the PPP team.
-            <br><br>
-        Scroll to zoom in and out, click on a poster to view details. 
-        </div>
-        <div class="header-info-footer btn"><span class="material-icons">
-            expand_less
-            </span></div>
-    </div>
+   
     <div id="bg-wrapper"></div>
 
 
@@ -68,5 +67,6 @@
 <script type="text/javascript" src="./data-mapping/posterAttrClean.json"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.1.3/pixi.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/pixi-viewport@4.23.1/dist/viewport.min.js"></script>
-<script src='./ui.js'></script>
-<script src='./sketch.js'></script>
+<script src='./sprite.js'></script>
+<script src='./canvas.js'></script>
+<script src='./app.js'></script>
