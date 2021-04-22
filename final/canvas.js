@@ -24,7 +24,7 @@ async function initData(){
     posterArray = Object.entries(posterAttr);
     posterArray = posterArray.sort((a,b)=> a[1].GridPosX - b[1].GridPosX);
     posterArray = posterArray.sort((a,b)=> a[1].GridPosY - b[1].GridPosY);
-    //posterArray = posterArray.slice(0, 500);
+    //posterArray = posterArray.slice(0, 1000);
     return posterArray;
 }
 
@@ -55,7 +55,10 @@ async function loadPosters(){
 
     const gridLargeDim = Math.max(xUnits, yUnits);
     const viewSmallDim = Math.min(viewport.worldWidth, viewport.worldHeight);
-    unitSize = Math.sqrt((viewSmallDim*viewSmallDim)/(gridLargeDim*gridLargeDim));
+    // unitSize = Math.sqrt((viewSmallDim*viewSmallDim)/(gridLargeDim*gridLargeDim));
+    // console.log(unitSize)
+    unitSize = Math.sqrt((viewSmallDim*viewport.worldHeight)/(xUnits*yUnits));
+  
 
     //make sure it's centered
     const viewOffsetX = (viewport.worldWidth-(unitSize*xUnits))/2;

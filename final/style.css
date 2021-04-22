@@ -144,7 +144,7 @@ header {
     position: absolute;
     box-shadow: 0 1px 3px 2px rgb(0 0 0 / 39%);
     border-bottom: 1px solid black;
-    transition: top .3s ease-in-out;
+    transition: top .3s ease-out;
     z-index: 10000;
     pointer-events: none;
     height: auto;
@@ -154,6 +154,7 @@ header {
 } 
 .header-info.show {
     top: 50px;
+    pointer-events: inherit;
 }
 .header-info-text {
     padding: 20px 50px;
@@ -211,6 +212,7 @@ canvas {
     align-content: center;
     align-items: center;
     cursor: pointer;
+    font-size: 14px;
 }
 .btn-row .btn {
     height: 100%;
@@ -230,7 +232,7 @@ canvas {
 
 
 #poster-tooltip .poster-title {
-    font-weight: 400;
+    font-weight: 500;
     font-size: 16px;
     margin-bottom: 20px;
 }

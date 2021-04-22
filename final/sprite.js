@@ -113,10 +113,10 @@ function populateTooltip(posterData){
     
     let posterTitle = document.createElement('div');
     posterTitle.className = 'poster-title';
-    posterTitle.innerHTML = `<div class="poster-title"><span>${posterData['Title']}</span><span class="date">${posterData['Date']}</span></div>`;
+    posterTitle.innerHTML = `<div class="poster-title"><span>${posterData['Title']}</span></div>`;
     posterBody.appendChild(posterTitle);
     
-    let attributes = [ 'Artist', 'Iconography', 'Language', 'Link'];
+    let attributes = [ 'Date', 'Artist', 'Iconography', 'Language', 'Link'];
     attributes.forEach(d=> {
         attr = posterData[d];
         if (attr){
@@ -139,7 +139,6 @@ function populateTooltip(posterData){
                 if (d == 'Link'){
                     htmlString = `<a href="${attr}">PPP Link<a>`
                 } else {
-
                     htmlString = attr;            }
 
             }
