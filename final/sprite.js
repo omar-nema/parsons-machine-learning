@@ -83,31 +83,11 @@ function zoomIntoSprite(sprite, x, y){
         hitArea = viewport.hitArea;
         let xPadding =  ( 100*(1-(unitSize/hitArea.width))/2 ) + '%';
         let yPadding =  ( 100*(1-(unitSize/hitArea.height))/2 ) + '%';   
-        hideAdjacentImages(xPadding, yPadding);
     }, 300)
     
     populateTooltip(posterAttr[key]) ;
     updateSpriteRes();
 }
-
-//disabled atm
-function hideAdjacentImages(xPadding, yPadding){
-    // pl = document.querySelector('.img-padding.left');
-    pr = document.querySelector('.img-padding.right');
-    // pt = document.querySelector('.img-padding.top');
-    // pb = document.querySelector('.img-padding.bottom');
-    //pl.style.width = xPadding;
-    pr.style.width = xPadding;
-    // pt.style.height = yPadding;
-    // pb.style.height = yPadding;   
-}
-function showAdjacentImages(){
-    document.querySelector('.img-padding.right').style.width = 0;
-    // document.querySelector('.img-padding.left').style.width = 0;
-    // document.querySelector('.img-padding.top').style.height = 0;
-    // document.querySelector('.img-padding.bottom').style.height = 0;         
-}
-
 
 //POPUATE METADATA POPUP
 let tooltip = document.querySelector('#poster-tooltip');
@@ -188,6 +168,5 @@ function populateTooltip(posterData){
 
 
 function hideTooltip(){
-    showAdjacentImages();
     tooltip.className = 'hidden' ;
 }

@@ -24,7 +24,7 @@ async function initData(){
     posterArray = Object.entries(posterAttr);
     posterArray = posterArray.sort((a,b)=> a[1].GridPosX - b[1].GridPosX);
     posterArray = posterArray.sort((a,b)=> a[1].GridPosY - b[1].GridPosY);
-    posterArray = posterArray.slice(0, 500);
+    //posterArray = posterArray.slice(0, 500);
     return posterArray;
 }
 
@@ -106,7 +106,7 @@ function initHeaderAndZoom(){
     var lastScale = 1;
     viewport.on('zoomed-end', (e) => {
         //if zoomedIn
-        if (e.transform.localTransform.a > lastScale){
+        if (e.transform.localTransform.a >= lastScale){
             updateSpriteRes();
         } 
         else {
@@ -114,7 +114,16 @@ function initHeaderAndZoom(){
         }
         lastScale = e.transform.localTransform.a;
     });
-
+    //performance issues with this?
+    const tooltip = document.querySelector('#poster-tooltip');
+    viewport.on('zoomed', (e) => {
+        if (viewport.transform.localTransform.a >= lastScale){
+            updateSpriteRes();
+        } else if (!tooltip.classList.contains('hidden')){
+            hideTooltip();
+        }
+        lastScale = viewport.transform.localTransform.a;
+    });
     viewport.on('moved-end', (e)=>{
         updateSpriteRes();
     })
