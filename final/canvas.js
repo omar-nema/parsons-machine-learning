@@ -24,10 +24,9 @@ async function initData(){
     posterArray = Object.entries(posterAttr);
     posterArray = posterArray.sort((a,b)=> a[1].GridPosX - b[1].GridPosX);
     posterArray = posterArray.sort((a,b)=> a[1].GridPosY - b[1].GridPosY);
-    //posterArray = posterArray.slice(0, 500);
+    posterArray = posterArray.slice(0, 500);
     return posterArray;
 }
-
 
 async function loadPosters(){
     const numImgs = posterArray.length;
@@ -56,7 +55,7 @@ async function loadPosters(){
 
     const gridLargeDim = Math.max(xUnits, yUnits);
     const viewSmallDim = Math.min(viewport.worldWidth, viewport.worldHeight);
-    const unitSize = Math.sqrt((viewSmallDim*viewSmallDim)/(gridLargeDim*gridLargeDim));
+    unitSize = Math.sqrt((viewSmallDim*viewSmallDim)/(gridLargeDim*gridLargeDim));
 
     //make sure it's centered
     const viewOffsetX = (viewport.worldWidth-(unitSize*xUnits))/2;
@@ -70,7 +69,7 @@ async function loadPosters(){
             let metadata = posterAttr[r.name];
             let x = metadata.GridPosX * unitSize + viewOffsetX;
             let y = metadata.GridPosY * unitSize + viewOffsetY;          
-            const sprite = createSprite(r, x, y, unitSize);
+            const sprite = createSprite(r, x, y);
             container.addChild(sprite);
             spriteHolder.push(sprite);
             spriteDict[r.name] = spriteHolder.length-1;

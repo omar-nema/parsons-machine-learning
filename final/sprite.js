@@ -1,5 +1,5 @@
 //CREATE SPRITE
-function createSprite(currResource, x, y, unitSize){
+function createSprite(currResource, x, y){
     const padding = .1;
     let sprite = new PIXI.Sprite(currResource.texture);
     // let spriteX = x*(unitSize)+padding*.5*unitSize;
@@ -64,7 +64,7 @@ function updateSpriteRes(){
     }
     return filterSprites;
 }
-function zoomIntoSprite(sprite, x, y, unitSize){  
+function zoomIntoSprite(sprite, x, y){  
     if (!x){
         x = sprite.x;
     }
@@ -89,16 +89,25 @@ function zoomIntoSprite(sprite, x, y, unitSize){
     populateTooltip(posterAttr[key]) ;
     updateSpriteRes();
 }
+
+//disabled atm
 function hideAdjacentImages(xPadding, yPadding){
-    pl = document.querySelector('.img-padding.left');
+    // pl = document.querySelector('.img-padding.left');
     pr = document.querySelector('.img-padding.right');
-    pt = document.querySelector('.img-padding.top');
-    pb = document.querySelector('.img-padding.bottom');
-    pl.style.width = xPadding;
+    // pt = document.querySelector('.img-padding.top');
+    // pb = document.querySelector('.img-padding.bottom');
+    //pl.style.width = xPadding;
     pr.style.width = xPadding;
-    pt.style.height = yPadding;
-    pb.style.height = yPadding;   
+    // pt.style.height = yPadding;
+    // pb.style.height = yPadding;   
 }
+function showAdjacentImages(){
+    document.querySelector('.img-padding.right').style.width = 0;
+    // document.querySelector('.img-padding.left').style.width = 0;
+    // document.querySelector('.img-padding.top').style.height = 0;
+    // document.querySelector('.img-padding.bottom').style.height = 0;         
+}
+
 
 //POPUATE METADATA POPUP
 let tooltip = document.querySelector('#poster-tooltip');
@@ -176,10 +185,9 @@ function populateTooltip(posterData){
     });
 
 }
+
+
 function hideTooltip(){
-    document.querySelector('.img-padding.left').style.width = 0;
-    document.querySelector('.img-padding.right').style.width = 0;
-    document.querySelector('.img-padding.top').style.height = 0;
-    document.querySelector('.img-padding.bottom').style.height = 0;          
+    showAdjacentImages();
     tooltip.className = 'hidden' ;
 }

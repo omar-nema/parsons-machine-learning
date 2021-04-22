@@ -1,9 +1,10 @@
 // INIT PIXI
 
 let app, viewport;
-let unitSize;
 var spriteHolder = [];
 let spriteDict = {};
+
+let unitSize;
 async function initApp(){
     await initPixi();
     showLoadProgress();
