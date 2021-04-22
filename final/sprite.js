@@ -103,7 +103,7 @@ function populateTooltip(posterData){
         hideTooltip();
         viewport.animate({
             time: 300,
-            scale: 5,
+            scale: viewport.transform.localTransform.a / 3,
         });
     })
  
