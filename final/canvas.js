@@ -15,18 +15,19 @@ async function initPixi(){
     viewport.drag().pinch().decelerate()
         .clamp({direction: 'all'})
         .clampZoom({minScale: 1});
-        viewport.wheel({ smooth: 10});
+    viewport.wheel({ smooth: 10});
     return [app, viewport]
 }
 
 let posterArray;
 async function initData(){
     posterArray = Object.entries(posterAttr);
-    posterArray = posterArray.sort((a,b)=> a[1].GridPosition[0] - b[1].GridPosition[0]);
-    posterArray = posterArray.sort((a,b)=> a[1].GridPosition[1] - b[1].GridPosition[1]);
-    ///posterArray = posterArray.slice(0, 1000);
+    posterArray = posterArray.sort((a,b)=> a[1].GridPosX - b[1].GridPosX);
+    posterArray = posterArray.sort((a,b)=> a[1].GridPosY - b[1].GridPosY);
+    //posterArray = posterArray.slice(0, 500);
     return posterArray;
 }
+
 
 async function loadPosters(){
     const numImgs = posterArray.length;
@@ -38,7 +39,6 @@ async function loadPosters(){
     //ADD IMAGES TO PIXI
     
     let container = new PIXI.Container();
-    var spriteDict = {};
     const xUnits = posterArray.reduce((a,b, index)=> {
         if (index == 1){
             return Math.max(a[1].GridPosX, b[1].GridPosX);
@@ -53,6 +53,7 @@ async function loadPosters(){
             return Math.max(a, b[1].GridPosY);
         }
     });
+
     const gridLargeDim = Math.max(xUnits, yUnits);
     const viewSmallDim = Math.min(viewport.worldWidth, viewport.worldHeight);
     const unitSize = Math.sqrt((viewSmallDim*viewSmallDim)/(gridLargeDim*gridLargeDim));

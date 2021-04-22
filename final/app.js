@@ -3,6 +3,7 @@
 let app, viewport;
 let unitSize;
 var spriteHolder = [];
+let spriteDict = {};
 async function initApp(){
     await initPixi();
     showLoadProgress();
