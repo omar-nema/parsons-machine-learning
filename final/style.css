@@ -48,7 +48,7 @@ a:hover {
     left: 0;
     display: flex;
     flex-direction: column;
-    padding-top: 15%;
+    padding-top: 10%;
     align-items: center;
     color: white;
     transition: all .3s ease-in-out;   
@@ -109,7 +109,7 @@ header {
 }
 .header-large {
     font-size: 18px;
-    font-weight: 400;
+    font-weight: 500;
     color: #e4e4e4;
     cursor: pointer;
     transition: opacity .15s linear;
@@ -191,7 +191,7 @@ canvas {
     box-shadow: 0px 1px 2px 2px rgb(0 0 0 / 10%);
     transition: opacity .15s ease-in-out;
     opacity: 1;
-    max-width: 20%;
+    width: 20%;
     z-index: 10000;
 }
 #poster-tooltip.hidden {

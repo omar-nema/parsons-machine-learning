@@ -137,7 +137,7 @@ function populateTooltip(posterData){
                 })
             } else {
                 if (d == 'Link'){
-                    htmlString = `<a href="${attr}">PPP Link<a>`
+                    htmlString = `<a target="_blank" href="${attr}">PPP Link<a>`
                 } else {
                     htmlString = attr;            }
 

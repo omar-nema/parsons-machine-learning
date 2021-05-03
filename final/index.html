@@ -12,17 +12,19 @@
         <div class="overlay-body">
             <div class="overlay-header">Explore the Palestine Poster Archive</div>
             <div class="desc">
-                 In this application,  <span class="semi-strong">a set of 5,000 posters created by Palestinian artists, and drawn from the Palestine Poster Project archive, are sorted by similarity using machine learning. The result is a canvas that allows you to explore historical artifacts of Palestinian identity and resistance over the past 90 years.</span>
+                 In this application,  <span class="semi-strong">a set of 5,000 posters drawn from the Palestine Poster Project archive are sorted by similarity using machine learning. The result is a canvas that allows you to explore  artifacts of Palestinian identity and resistance over the past 85 years.</span>
                  <br><br>
-                <span class='sec-text'>Poster assets and metadata were taken from the <a href="https://www.palestineposterproject.org/"  target="_blank">Palestine Poster Project</a>, curated by Dan Walsh. The PPP archive contains a set of 10,000 posters dating from 1930 to present day. Sole credit for archiving and categorizing the posters in this project goes to the PPP team.</span>
+                 Note that this app only displays posters created by Palestinian artists. Non-Palestinian Arab, and Israeli artists were excluded. Please visit the Palestine Poster Project if you're curious to explore posters in these domains.
+                 <br><br>
+                <span class='sec-text'>Poster assets and metadata were taken from the <a href="https://www.palestineposterproject.org/"  target="_blank">Palestine Poster Project</a>, curated by Dan Walsh. The PPP archive contains a set of 10,000 posters related to Palestine dating from 1933 to present day. Sole credit for archiving and categorizing the posters in this project goes to the PPP team.</span>
              </div>
-            <div class="load-btn disabled"><span id="progress" class="numPosters"></span></div>
+            <div class="load-btn disabled"><span id="progress" class="numPosters">Loading 0%</span></div>
         </div>
      
     </div>
     <div class="header-info">
         <div class="header-info-text">
-            In the grid below, posters are sorted by similarity - posters close to each other share similar visual characteristics and artists (determined by a combination of machine learning methods - feature extraction and dimensional reduction).
+            In the grid below, posters are sorted by similarity - posters close to each other share similar visual characteristics and artists (specifically: feature extraction on both visual qualities and metadata, followed by dimensional reduction). 
             <br><br>
         Scroll to zoom in and out, click on a poster to view details. 
         </div>
@@ -32,7 +34,7 @@
     </div>
     <header>
         <div class="header-large">
-            <span>Palestine Poster Project</span>
+            <span>Palestine Poster Project Viewer</span>
             <span class="material-icons"> help</span>
     
         </div>

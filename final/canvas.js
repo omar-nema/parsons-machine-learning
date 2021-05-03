@@ -24,7 +24,7 @@ async function initData(){
     posterArray = Object.entries(posterAttr);
     posterArray = posterArray.sort((a,b)=> a[1].GridPosX - b[1].GridPosX);
     posterArray = posterArray.sort((a,b)=> a[1].GridPosY - b[1].GridPosY);
-    //posterArray = posterArray.slice(0, 1000);
+    posterArray = posterArray.slice(0, 1000);
     return posterArray;
 }
 
